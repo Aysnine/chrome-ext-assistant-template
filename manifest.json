@@ -3,8 +3,23 @@
   "description": "Assistant on chromium browser",
   "version": "1.0",
   "manifest_version": 3,
+  "icons": {
+    "16": "logo.png",
+    "32": "logo.png",
+    "48": "logo.png",
+    "128": "logo.png"
+  },
+  "content_scripts": [
+    {
+      "js": ["src/content/index.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
   "action": {
-    "default_popup": "popup.html",
+    "default_popup": "src/popup/index.html",
     "default_icon": "logo.png"
+  },
+  "background": {
+    "service_worker": "src/service/index.js"
   }
 }
