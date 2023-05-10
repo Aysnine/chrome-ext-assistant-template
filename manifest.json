@@ -23,5 +23,5 @@
     "service_worker": "src/service/index.js"
   },
   "host_permissions": ["http://*/*", "https://*/*"],
-  "permissions": ["scripting"]
+  "permissions": ["scripting", "tabs"]
 }

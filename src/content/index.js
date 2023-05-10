@@ -32,7 +32,7 @@ const { rawRoot, shadowRoot: root } = injectRoot();
 // Test inline style
 const style = document.createElement("style");
 style.innerHTML = `
-.demo-text {
+.demo-container {
   position: fixed;
   bottom: 40px;
   right: 20px;
@@ -45,10 +45,28 @@ style.innerHTML = `
 root.appendChild(style);
 
 // Test fixed content
-const div = document.createElement("div");
-div.classList.add("demo-text");
-div.innerHTML = "Hello from page content";
-root.appendChild(div);
+const container = document.createElement("div");
+container.classList.add("demo-container");
+
+const text = document.createElement("div");
+text.innerHTML = "Hello from page content";
+container.appendChild(text);
+
+const openDashboard = document.createElement("button");
+openDashboard.textContent = "Open Dashboard";
+openDashboard.addEventListener("click", () => {
+  chrome.runtime.sendMessage({ action: "openDashboard" });
+});
+container.appendChild(openDashboard);
+
+const openSetting = document.createElement("button");
+openSetting.textContent = "Open Setting";
+openSetting.addEventListener("click", () => {
+  chrome.runtime.sendMessage({ action: "openSetting" });
+});
+container.appendChild(openSetting);
+
+root.appendChild(container);
 
 // Test toggle display
 rawRoot.style.display = "none"; // default display none

@@ -15,12 +15,25 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo) => {
   }
 });
 
+// Listen action for popup or toggle content
 chrome.action.onClicked.addListener(async (tab) => {
   await chrome.scripting.executeScript({
     target: { tabId: tab.id },
     function: () => {},
   });
 
-  // send message to content script
   chrome.tabs.sendMessage(tab.id, { action: "toggle" });
+});
+
+// Listen open inner page action
+chrome.runtime.onMessage.addListener((message) => {
+  if (message.action === "openDashboard") {
+    chrome.tabs.create({
+      url: chrome.runtime.getURL("src/dashboard/index.html"),
+    });
+  } else if (message.action === "openSetting") {
+    chrome.tabs.create({
+      url: chrome.runtime.getURL("src/setting/index.html"),
+    });
+  }
 });
