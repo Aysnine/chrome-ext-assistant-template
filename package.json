@@ -3,5 +3,8 @@
   "version": "1.0.0",
   "repository": "https://github.com/Aysnine/chrome-ext-assistant-template.git",
   "author": "CNine <cnine229@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@types/chrome": "^0.0.235"
+  }
 }
